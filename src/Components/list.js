@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import Form from './form';
 import Items from './items';
 
-import filter from 'lodash/filter';
+import cloneDeep from 'lodash/cloneDeep';
+import remove from 'lodash/remove';
 
 class List extends Component {
     constructor(props) {
@@ -28,7 +29,16 @@ class List extends Component {
     }
 
     removeItem = (category, itemName) => {
-                
+        let thisItems = this.state.items;
+        remove(thisItems[category], {
+            name: itemName
+        });
+
+        this.setState({
+            items: thisItems
+        })
+
+        console.log(this.state);
     }
 
     render() {
@@ -39,7 +49,7 @@ class List extends Component {
                 {
                     Object.keys(this.state.items).map((e) => { 
                         return (
-                            <Items key={e} categoryName={e} categoryItems={this.state.items[e]}/>
+                            <Items key={e} categoryName={e} categoryItems={this.state.items[e]} removeItem={this.removeItem.bind(this)}/>
                         )
                     })
                 }

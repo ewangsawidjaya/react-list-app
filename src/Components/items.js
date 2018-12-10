@@ -5,14 +5,12 @@ import { toast } from 'react-toastify';
 const toastOptions = {
     autoClose: 2000,
     hideProgressBar: true,
-    type: toast.TYPE.INFO,
     position: 'top-right'
 }
 
 class Items extends Component {
     removeItem = (categoryName, itemName) => {
-        console.log(categoryName);
-        console.log(itemName);
+        this.props.removeItem(categoryName, itemName);
         toast.success('Removed the item', toastOptions);
     }
     

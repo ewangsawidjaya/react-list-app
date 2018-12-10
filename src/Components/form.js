@@ -32,14 +32,26 @@ class Form extends Component {
             this.state.price,
             this.state.category
         );
+
+        this.setState({
+            name: '',
+            price: '',
+            category: ''
+        })
     }
     
     render() {
         return (
             <div className='form'>
-                Name: <input type='text' onChange={(e) => this.handleChange('name', e)}/>
-                Price: <input type='number' onChange={(e) => this.handleChange('price', e)}/>
-                Category: <input type='text' onChange={(e) => this.handleChange('category', e)}/>
+                Name: <input type='text' onChange={(e) => this.handleChange('name', e)} value={this.state.name}/>
+                Price: <input type='number' onChange={(e) => this.handleChange('price', e)} value={this.state.price}/>
+                Category: 
+                <select onChange={(e) => this.handleChange('category', e)} value={this.state.category}>
+                    <option value=''>Please select a category</option>
+                    <option value='Electronics'>Electronics</option>
+                    <option value='Kitchen'>Kitchen</option>
+                    <option value='Clothing'>Clothing</option>
+                </select>
                 {
                     this.state.name !== '' &&
                     this.state.price !== '' &&
