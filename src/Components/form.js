@@ -45,9 +45,10 @@ class Form extends Component {
     render() {
         return (
             <div className='form'>
-                Name: <input type='text' onChange={(e) => this.handleChange('name', e)} value={this.state.name}/>
-                Price: <input type='number' onChange={(e) => this.handleChange('price', e)} value={this.state.price}/>
-                Category: 
+                <div style={{color:'red',fontStyle:'italics'}}>* indicates required fields</div>
+                Name * : <input type='text' onChange={(e) => this.handleChange('name', e)} value={this.state.name}/>
+                Price * : <input type='number' onChange={(e) => this.handleChange('price', e)} value={this.state.price}/>
+                Category * : 
                 <select onChange={(e) => this.handleChange('category', e)} value={this.state.category}>
                     <option value=''>Please select a category</option>
                     <option value='Electronics'>Electronics</option>
