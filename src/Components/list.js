@@ -9,12 +9,14 @@ class List extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            items: {}
+            items: {},
+            total: 0
         }
     }
 
-    addItem = (name, price, category) => 
-    {   //copy items locally to alter
+    addItem = (name, price, category) => {   
+        let total = this.state.total;
+        //copy items locally to alter
         let thisItems = this.state.items;
         //check if category exists in items
         //if yes then add new item to the array of objects
@@ -25,12 +27,15 @@ class List extends Component {
         else{
             thisItems[category] = [{ 'name': name, 'price': price }];
         }
+        total += parseFloat(price);
         this.setState({
-            items: thisItems
+            items: thisItems,
+            total: total
         })
     }
 
-    removeItem = (category, itemName) => {
+    removeItem = (category, itemName, itemPrice) => {
+        let total = this.state.total;
         //copy state items locally to alter
         let thisItems = this.state.items;
         remove(thisItems[category], {
@@ -42,9 +47,11 @@ class List extends Component {
         if (thisItems[category].length === 0){
             delete thisItems[category];
         }
+        total -= parseFloat(itemPrice);
 
         this.setState({
-            items: thisItems
+            items: thisItems,
+            total: total
         })
 
     }
@@ -60,6 +67,9 @@ class List extends Component {
                             <Items key={e} categoryName={e} categoryItems={this.state.items[e]} removeItem={this.removeItem.bind(this)}/>
                         )
                     })
+                }
+                {
+                    this.state.total > 0 ? <div>Total: ${this.state.total}</div> : ''
                 }
             </div>
         )

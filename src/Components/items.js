@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import { toast } from 'react-toastify';
 
+import { Table } from 'react-bootstrap';
+
 const toastOptions = {
     autoClose: 2000,
     hideProgressBar: true,
@@ -9,9 +11,9 @@ const toastOptions = {
 }
 
 class Items extends Component {
-    removeItem = (categoryName, itemName) => {
+    removeItem = (categoryName, itemName, itemPrice) => {
         //removeItem calls the handler passed in as a prop to component
-        this.props.removeItem(categoryName, itemName);
+        this.props.removeItem(categoryName, itemName, itemPrice);
         toast.success('Removed the item', toastOptions);
     }
     
@@ -19,30 +21,32 @@ class Items extends Component {
         let categoryTotal = 0;
 
         return (
-            <div className='rTable'>
-                <div className='rTableRow'>
-                    <div className='rTableCell'>Category: {this.props.categoryName}</div>
-                    <div className='rTableCell'></div>
-                    <div className='rTableCell'></div>
-                </div>
+            <Table striped bordered condensed responsive>
+                <tbody>
+                <tr>
+                    <td>Category: {this.props.categoryName}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
                 {
                     this.props.categoryItems.map((e) => { 
                         categoryTotal += parseFloat(e.price);
                         return (
-                        <div className='rTableRow' key={this.props.categoryName + '_' + e.name}>
-                            <div className='rTableCell'>{e.name}</div>
-                            <div className='rTableCell'>${e.price}</div>
-                            <div className='rTableCell'><input type='button' value='X' onClick={() => this.removeItem(this.props.categoryName, e.name)}/></div>
-                        </div>
+                        <tr key={this.props.categoryName + '_' + e.name}>
+                            <td>{e.name}</td>
+                            <td>${e.price}</td>
+                            <td><input type='button' value='X' onClick={() => this.removeItem(this.props.categoryName, e.name, e.price)}/></td>
+                        </tr>
                         );
                     })
                 }
-                <div className='rTableRow'>
-                    <div className='rTableCell' style={{textAlign:'right'}}>Total</div>
-                    <div className='rTableCell'>${categoryTotal}</div>
-                    <div className='rTableCell'></div>
-                </div>
-            </div>
+                <tr>
+                    <td>Total</td>
+                    <td>${categoryTotal}</td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </Table>
         )
     }
 }
