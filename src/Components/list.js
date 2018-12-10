@@ -5,6 +5,8 @@ import Items from './items';
 
 import remove from 'lodash/remove';
 
+import { Table } from 'react-bootstrap';
+
 class List extends Component {
     constructor(props) {
         super(props);
@@ -61,6 +63,7 @@ class List extends Component {
             <div>
                 <Form addItem={this.addItem.bind(this)}/>
                 <br/>
+                <Table striped bordered condensed responsive>
                 {
                     Object.keys(this.state.items).map((e) => { 
                         return (
@@ -68,6 +71,7 @@ class List extends Component {
                         )
                     })
                 }
+                </Table>
                 {
                     this.state.total > 0 ? <div>Total: ${this.state.total}</div> : ''
                 }

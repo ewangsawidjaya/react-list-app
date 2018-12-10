@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 import { toast } from 'react-toastify';
 
-import { Table } from 'react-bootstrap';
-
 const toastOptions = {
     autoClose: 2000,
     hideProgressBar: true,
@@ -21,7 +19,7 @@ class Items extends Component {
         let categoryTotal = 0;
 
         return (
-            <Table striped bordered condensed responsive>
+            
                 <tbody>
                 <tr>
                     <td>Category: {this.props.categoryName}</td>
@@ -46,7 +44,7 @@ class Items extends Component {
                     <td></td>
                 </tr>
                 </tbody>
-            </Table>
+            
         )
     }
 }
