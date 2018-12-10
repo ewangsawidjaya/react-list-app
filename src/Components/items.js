@@ -10,6 +10,7 @@ const toastOptions = {
 
 class Items extends Component {
     removeItem = (categoryName, itemName) => {
+        //removeItem calls the handler passed in as a prop to component
         this.props.removeItem(categoryName, itemName);
         toast.success('Removed the item', toastOptions);
     }

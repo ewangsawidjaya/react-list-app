@@ -20,12 +20,14 @@ class Form extends Component {
     }
 
     handleChange = (attr, e) => {
+        //handle onchange event for each field
         let state = this.state;
         state[attr] = e.target.value;
         this.setState(state);
     }
 
     addItem = () => {
+        //addItem calls the handler passed in as a prop to the component
         toast.success('Added the item', toastOptions);
         this.props.addItem(
             this.state.name,
@@ -53,6 +55,8 @@ class Form extends Component {
                     <option value='Clothing'>Clothing</option>
                 </select>
                 {
+                    //all fields are required before the button is shown
+                    //prevents empty values
                     this.state.name !== '' &&
                     this.state.price !== '' &&
                     this.state.category !== '' &&

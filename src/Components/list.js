@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import Form from './form';
 import Items from './items';
 
-import cloneDeep from 'lodash/cloneDeep';
 import remove from 'lodash/remove';
 
 class List extends Component {
@@ -14,9 +13,12 @@ class List extends Component {
         }
     }
 
-    addItem = (name, price, category) => {
+    addItem = (name, price, category) => 
+    {   //copy items locally to alter
         let thisItems = this.state.items;
-
+        //check if category exists in items
+        //if yes then add new item to the array of objects
+        //if not then create new array with object {name,price}
         if (thisItems.hasOwnProperty(category)){
             thisItems[category].push({ 'name': name, 'price': price });
         }
@@ -29,16 +31,22 @@ class List extends Component {
     }
 
     removeItem = (category, itemName) => {
+        //copy state items locally to alter
         let thisItems = this.state.items;
         remove(thisItems[category], {
             name: itemName
         });
 
+        //check if the category has items in it
+        //if no items, then remove category
+        if (thisItems[category].length === 0){
+            delete thisItems[category];
+        }
+
         this.setState({
             items: thisItems
         })
 
-        console.log(this.state);
     }
 
     render() {
